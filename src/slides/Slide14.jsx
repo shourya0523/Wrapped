@@ -25,7 +25,20 @@ const summaryHighlights = [
   },
   {
     title: 'Community',
-    description: 'Started Claude Builders Club — 200+ members, 30 builders',
+    description: (
+      <>
+        Started{' '}
+        <a
+          href="https://claudebuildersneu.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-blue hover:underline"
+        >
+          Claude Builders Club
+        </a>
+        {' '}— 200+ members, 30 builders
+      </>
+    ),
   },
   {
     title: 'Growth',

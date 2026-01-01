@@ -48,11 +48,6 @@ function App() {
     Slide14,
   ]
 
-  // Skip to summary (last slide)
-  const skipToSummary = useCallback(() => {
-    scrollToSlide(TOTAL_SLIDES - 1)
-  }, [])
-
   // Scroll to a specific slide
   const scrollToSlide = useCallback((index) => {
     if (containerRef.current) {
@@ -119,7 +114,7 @@ function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentSlide])
+  }, [currentSlide, scrollToSlide])
 
   // Set initial scroll position
   useEffect(() => {
@@ -129,7 +124,7 @@ function App() {
         scrollToSlide(0)
       }, 100)
     }
-  }, [])
+  }, [scrollToSlide])
 
   return (
     <div 
@@ -180,7 +175,7 @@ function App() {
             key={index}
             onClick={() => scrollToSlide(index)}
             className={`w-1.5 h-8 transition-opacity ${
-              index === currentSlide ? 'opacity-100 bg-muted-blue' : 'opacity-30 bg-white'
+              index === currentSlide ? 'opacity-100 bg-muted-blue' : 'opacity-30 bg-white dark:bg-gray-300'
             }`}
           />
         ))}

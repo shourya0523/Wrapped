@@ -35,10 +35,10 @@ export default function Slide2({ active }) {
         transition={{ duration: 0.3 }}
         className="relative z-10 max-w-4xl px-8"
       >
-        <h2 className="text-5xl md:text-7xl font-light mb-6">
+        <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
           Something felt incomplete.
         </h2>
-        <p className="text-xl md:text-2xl text-gray-400 font-light">
+        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light">
           I wanted to see things run, not just explain why they might.
         </p>
       </motion.div>

@@ -17,10 +17,10 @@ export default function Slide12({ active }) {
         transition={{ duration: 1.5, delay: 1 }}
         className="max-w-4xl text-center relative z-10"
       >
-        <h2 className="text-5xl md:text-7xl font-light mb-6">
+        <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
           I like building systems.
         </h2>
-        <p className="text-xl md:text-2xl text-gray-400 font-light">
+        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light">
           Software. Products. Teams.
         </p>
       </motion.div>

@@ -20,14 +20,14 @@ export default function Slide11({ active }) {
             animate={{ opacity: active ? 1 : 0, x: active ? 0 : -20 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-light mb-4 text-gray-300 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-light mb-4 text-gray-900 dark:text-gray-300 leading-tight">
               I didn't do this alone.
             </h2>
             <motion.p
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: active ? 1 : 0, x: active ? 0 : -20 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base md:text-lg text-gray-500 font-light max-w-md"
+              className="text-base md:text-lg text-gray-600 dark:text-gray-500 font-light max-w-md"
             >
               Most of what I learned came from building next to other people.
             </motion.p>
@@ -53,7 +53,7 @@ export default function Slide11({ active }) {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-all duration-200 hover:border-gray-700/40 hover:bg-gray-900/40 cursor-default whitespace-nowrap">
-                  <span className="text-xl md:text-2xl text-gray-400 font-light">
+                  <span className="text-xl md:text-2xl text-gray-700 dark:text-gray-400 font-light">
                     {person.name}
                   </span>
                 </div>

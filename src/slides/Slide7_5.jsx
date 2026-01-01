@@ -22,10 +22,10 @@ export default function Slide7_5({ active }) {
         transition={{ duration: 1 }}
         className="relative z-10 max-w-4xl px-8"
       >
-        <h2 className="text-5xl md:text-7xl font-light mb-6">
+        <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
           I wanted to build alongside people who cared.
         </h2>
-        <p className="text-xl md:text-2xl text-gray-400 font-light">
+        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light">
           So I started the{' '}
           <a
             href="https://claudebuildersneu.com/"

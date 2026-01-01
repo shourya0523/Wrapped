@@ -29,10 +29,10 @@ export default function Slide4({ active }) {
           transition={{ duration: 1 }}
           className="mb-12"
         >
-          <h2 className="text-5xl md:text-7xl font-light mb-6">
+          <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
             I kept choosing projects that had to work.
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400 font-light">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light">
             Less theory. More systems.
           </p>
         </motion.div>
@@ -46,9 +46,9 @@ export default function Slide4({ active }) {
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
             >
               <TiltedCard tilt={2}>
-                <div className="p-6 bg-gray-900/50 rounded-lg border border-gray-800 h-full">
-                  <h3 className="text-xl font-medium mb-2">{project.title}</h3>
-                  <p className="text-gray-400 text-sm">{project.description}</p>
+                <div className="p-6 bg-white/80 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-800 h-full">
+                  <h3 className="text-xl font-medium mb-2 text-gray-900 dark:text-white">{project.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{project.description}</p>
                 </div>
               </TiltedCard>
             </motion.div>

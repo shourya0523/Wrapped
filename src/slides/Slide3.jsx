@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { SpotlightCard } from '../reactbits/Components/SpotlightCard'
 import FaultyTerminal from '../reactbits/Backgrounds/FaultyTerminal'
+import finhacksImage from '../images/Finhacks.JPG'
 
 export default function Slide3({ active }) {
   return (
@@ -14,13 +15,13 @@ export default function Slide3({ active }) {
           animate={{ opacity: active ? 1 : 0 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-5xl md:text-7xl font-light mb-4">
+          <h2 className="text-5xl md:text-7xl font-light mb-4 text-gray-900 dark:text-white">
             January.
           </h2>
-          <h2 className="text-5xl md:text-7xl font-light mb-6">
+          <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
             A hackathon.
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400 font-light mb-4">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light mb-4">
             My first time building something end to end.
           </p>
           <motion.p
@@ -45,10 +46,17 @@ export default function Slide3({ active }) {
             className="block"
           >
             <SpotlightCard>
-              <div className="w-full h-96 bg-gray-800 rounded-lg flex items-center justify-center group hover:bg-gray-750 transition-colors cursor-pointer">
-                <div className="text-center">
-                  <p className="text-gray-400 text-sm mb-2 group-hover:text-muted-blue transition-colors">FinHacks 2025</p>
-                  <p className="text-gray-500 text-xs">Spendr — Best AI Hack</p>
+              <div className="w-full h-96 rounded-lg overflow-hidden group cursor-pointer relative">
+                <img 
+                  src={finhacksImage} 
+                  alt="FinHacks 2025 - Spendr Best AI Hack"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+                  <div className="text-center w-full">
+                    <p className="text-white text-sm mb-1 group-hover:text-muted-blue transition-colors font-medium">FinHacks 2025</p>
+                    <p className="text-gray-300 text-xs">Spendr — Best AI Hack</p>
+                  </div>
                 </div>
               </div>
             </SpotlightCard>

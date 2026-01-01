@@ -77,13 +77,13 @@ export default function Slide10({ active }) {
           transition={{ duration: 1 }}
           className="mb-12"
         >
-          <h2 className="text-5xl md:text-7xl font-light mb-6">
+          <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
             I built more consistently than I realized.
           </h2>
         </motion.div>
 
         <div className="mb-6">
-          <div className="font-mono text-4xl font-medium mb-4">
+          <div className="font-mono text-4xl font-medium mb-4 text-gray-900 dark:text-white">
             {contributionCount} contributions
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function Slide10({ active }) {
               transition={{ duration: 0.3, delay: index * 0.05 }}
               className="space-y-1"
             >
-              <div className="text-xs text-gray-500 font-mono mb-2">{month}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-500 font-mono mb-2">{month}</div>
               <div className="space-y-1">
                 {[1, 2, 3, 4].map((week) => (
                   <motion.div

@@ -43,7 +43,7 @@ export default function Slide5({ active }) {
           transition={{ duration: 1 }}
           className="mb-12"
         >
-          <h2 className="text-5xl md:text-7xl font-light mb-4">
+          <h2 className="text-5xl md:text-7xl font-light mb-4 text-gray-900 dark:text-white">
             I changed my major.
           </h2>
           <AnimatePresence mode="wait">
@@ -54,7 +54,7 @@ export default function Slide5({ active }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-5xl md:text-7xl font-light mb-4"
+                className="text-5xl md:text-7xl font-light mb-4 text-gray-900 dark:text-white"
               >
                 Then again.
               </motion.h2>
@@ -68,7 +68,7 @@ export default function Slide5({ active }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-5xl md:text-7xl font-light mb-6"
+                className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white"
               >
                 Then for real.
               </motion.h2>
@@ -82,7 +82,7 @@ export default function Slide5({ active }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-xl md:text-2xl text-gray-400 font-light"
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light"
             >
               {timeline[0]?.label}
             </motion.p>
@@ -92,7 +92,7 @@ export default function Slide5({ active }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-xl md:text-2xl text-gray-400 font-light"
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light"
             >
               {timeline[1]?.label}
             </motion.p>

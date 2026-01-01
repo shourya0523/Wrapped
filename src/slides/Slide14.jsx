@@ -17,7 +17,19 @@ const summaryHighlights = [
   },
   {
     title: 'Research',
-    description: 'Worked with 150k+ patents, 500k+ clinical trials at SNAP Life Sciences',
+    description: (
+      <>
+        Worked with 150k+ patents, 500k+ clinical trials at{' '}
+        <a
+          href="https://snaplifesciences.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-blue hover:underline"
+        >
+          SNAP Life Sciences
+        </a>
+      </>
+    ),
   },
   {
     title: 'Leadership',

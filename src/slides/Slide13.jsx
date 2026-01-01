@@ -28,10 +28,10 @@ export default function Slide13({ active }) {
           transition={{ duration: 1 }}
           className="mb-12"
         >
-          <h2 className="text-5xl md:text-7xl font-light mb-6">
+          <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
             In 2026, I want to go deeper.
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400 font-light">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light">
             More CS. More building. Fewer pivots.
           </p>
         </motion.div>
@@ -53,7 +53,7 @@ export default function Slide13({ active }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: active ? 1 : 0, y: active ? 0 : 10 }}
               transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-              className="px-6 py-3 border border-gray-700 rounded-lg text-gray-300 hover:border-muted-blue hover:text-muted-blue transition-colors text-sm md:text-base"
+              className="px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:border-muted-blue hover:text-muted-blue transition-colors text-sm md:text-base"
             >
               {button.label}
             </motion.a>

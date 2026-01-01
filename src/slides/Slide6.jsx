@@ -87,14 +87,14 @@ export default function Slide6({ active }) {
           animate={{ opacity: active ? 1 : 0 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-5xl md:text-7xl font-light mb-6">
+          <h2 className="text-5xl md:text-7xl font-light mb-6 text-gray-900 dark:text-white">
             Research stopped being abstract.
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400 font-light mb-8">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light mb-8">
             AI in life sciences.
           </p>
-          <div className="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">
-            <p className="text-gray-500 text-sm">SNAP Life Sciences or lab imagery placeholder</p>
+          <div className="w-full h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+            <p className="text-gray-600 dark:text-gray-500 text-sm">SNAP Life Sciences or lab imagery placeholder</p>
           </div>
         </motion.div>
 
@@ -116,13 +116,13 @@ export default function Slide6({ active }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: active ? 1 : 0 }}
                 transition={{ duration: 0.8, delay: 0.7 + index * 0.2 }}
-                className="font-mono text-4xl md:text-5xl font-medium mb-2"
+                className="font-mono text-4xl md:text-5xl font-medium mb-2 text-gray-900 dark:text-white"
               >
                 {active && counted
                   ? formatNumber(displayValues[index], stat.suffix)
                   : formatNumber(0, stat.suffix)}
               </motion.div>
-              <div className="text-gray-400 text-sm font-light">{stat.label}</div>
+              <div className="text-gray-600 dark:text-gray-400 text-sm font-light">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

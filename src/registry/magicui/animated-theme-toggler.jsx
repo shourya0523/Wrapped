@@ -18,7 +18,6 @@ export function AnimatedThemeToggler() {
 
   const handleToggle = () => {
     const newTheme = isDark ? 'light' : 'dark'
-    console.log('Toggling theme from', theme, 'to', newTheme)
     setTheme(newTheme)
   }
 
@@ -79,4 +78,3 @@ export function AnimatedThemeToggler() {
     </button>
   )
 }
-

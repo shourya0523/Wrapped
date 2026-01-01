@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useRef, useMemo } from 'react'
 import Threads from '../reactbits/Backgrounds/Threads'
+import snapLifeImage from '../images/SnapLife.jpeg'
 
 export default function Slide6({ active }) {
   const [counted, setCounted] = useState(false)
@@ -93,8 +94,12 @@ export default function Slide6({ active }) {
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light mb-8">
             AI in life sciences.
           </p>
-          <div className="w-full h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-            <p className="text-gray-600 dark:text-gray-500 text-sm">SNAP Life Sciences or lab imagery placeholder</p>
+          <div className="w-full h-64 rounded-lg overflow-hidden">
+            <img 
+              src={snapLifeImage} 
+              alt="SNAP Life Sciences"
+              className="w-full h-full object-cover"
+            />
           </div>
         </motion.div>
 

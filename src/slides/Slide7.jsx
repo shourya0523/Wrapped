@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Threads from '../reactbits/Backgrounds/Threads'
+import forgeImage1 from '../images/Forge.PNG'
+import forgeImage2 from '../images/Forge2.png'
+import forgeImage3 from '../images/Forge3.png'
 
 export default function Slide7({ active }) {
   const [progress, setProgress] = useState(0)
@@ -20,11 +23,10 @@ export default function Slide7({ active }) {
     'Shipped weeks faster through system design',
   ]
 
-  // Placeholder for Forge images - replace with actual image imports when available
   const forgeImages = [
-    // { image: forgeImage1, alt: 'Forge Image 1' },
-    // { image: forgeImage2, alt: 'Forge Image 2' },
-    // { image: forgeImage3, alt: 'Forge Image 3' },
+    { image: forgeImage1, alt: 'Forge Image 1' },
+    { image: forgeImage2, alt: 'Forge Image 2' },
+    { image: forgeImage3, alt: 'Forge Image 3' },
   ]
 
   return (

@@ -56,13 +56,15 @@ export function AnimatedThemeToggler() {
         <motion.div
           className="absolute top-1 left-1 w-6 h-6 rounded-full bg-white shadow-lg flex items-center justify-center"
           initial={false}
+          style={{ willChange: 'transform' }}
           animate={{
             x: isDark ? 24 : 0,
           }}
           transition={{
             type: 'spring',
-            stiffness: 500,
-            damping: 30,
+            stiffness: 400,
+            damping: 28,
+            mass: 0.5,
           }}
         >
           <AnimatePresence mode="wait" initial={false}>
@@ -118,6 +120,7 @@ export function AnimatedThemeToggler() {
               width: '400vmax',
               height: '400vmax',
               backgroundColor: newTheme === 'dark' ? '#0B0E14' : '#F8F9FA',
+              willChange: 'transform, opacity',
             }}
             initial={{
               x: '-50%',
@@ -133,7 +136,7 @@ export function AnimatedThemeToggler() {
               opacity: 0,
             }}
             transition={{
-              duration: 0.8,
+              duration: 0.7,
               ease: [0.16, 1, 0.3, 1], // easeOutExpo
             }}
           />

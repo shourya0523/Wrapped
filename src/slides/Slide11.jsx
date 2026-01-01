@@ -52,7 +52,7 @@ export default function Slide11({ active }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-all duration-200 hover:border-gray-700/40 hover:bg-gray-900/40 cursor-default whitespace-nowrap">
+                <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-all duration-200 hover:border-gray-700/40 hover:bg-gray-900/40 cursor-default whitespace-nowrap button-pulse">
                   <span className="text-xl md:text-2xl text-gray-700 dark:text-gray-400 font-light">
                     {person.name}
                   </span>
@@ -102,7 +102,7 @@ export default function Slide11({ active }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-colors hover:border-gray-700/40 cursor-default">
+                <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-colors hover:border-gray-700/40 cursor-default button-pulse">
                   <span className="text-xl text-gray-400 font-light">
                     {person.name}
                   </span>

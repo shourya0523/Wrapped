@@ -52,3 +52,134 @@ html {
   scroll-behavior: smooth;
 }
 
+/* GPU acceleration for animated elements */
+[data-framer-motion-component] {
+  transform: translateZ(0);
+}
+
+/* Pulsing color animation for all clickable buttons */
+@keyframes buttonPulse {
+  0%, 100% {
+    border-color: currentColor;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    border-color: rgba(74, 111, 165, 0.7);
+    filter: brightness(1.08) saturate(1.15);
+  }
+}
+
+@keyframes buttonPulseGlow {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes buttonPulseDark {
+  0%, 100% {
+    border-color: currentColor;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    border-color: rgba(74, 111, 165, 0.8);
+    filter: brightness(1.12) saturate(1.2);
+  }
+}
+
+@keyframes buttonPulseGlowDark {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+/* Apply pulsing to all buttons */
+button {
+  animation: buttonPulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: rgba(74, 111, 165, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  animation: buttonPulseGlow 3s ease-in-out infinite;
+}
+
+.dark button {
+  animation: buttonPulseDark 3s ease-in-out infinite;
+}
+
+.dark button::before {
+  background: rgba(74, 111, 165, 0.3);
+  animation: buttonPulseGlowDark 3s ease-in-out infinite;
+}
+
+/* Apply pulsing to clickable links that are styled as buttons */
+a[href][target="_blank"] {
+  animation: buttonPulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+a[href][target="_blank"]::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: rgba(74, 111, 165, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  animation: buttonPulseGlow 3s ease-in-out infinite;
+}
+
+.dark a[href][target="_blank"] {
+  animation: buttonPulseDark 3s ease-in-out infinite;
+}
+
+.dark a[href][target="_blank"]::before {
+  background: rgba(74, 111, 165, 0.3);
+  animation: buttonPulseGlowDark 3s ease-in-out infinite;
+}
+
+/* Apply pulsing to people name buttons (interactive divs) */
+.button-pulse {
+  animation: buttonPulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+.button-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: rgba(74, 111, 165, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  animation: buttonPulseGlow 3s ease-in-out infinite;
+}
+
+.dark .button-pulse {
+  animation: buttonPulseDark 3s ease-in-out infinite;
+}
+
+.dark .button-pulse::before {
+  background: rgba(74, 111, 165, 0.3);
+  animation: buttonPulseGlowDark 3s ease-in-out infinite;
+}
+

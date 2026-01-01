@@ -39,16 +39,8 @@ export function AnimatedThemeToggler() {
     setTimeout(() => {
       setIsAnimating(false)
       setNewTheme(null)
-    }, 600)
+    }, 800)
   }
-
-  // Calculate the maximum distance from center to corner for full coverage
-  const maxRadius = typeof window !== 'undefined' 
-    ? Math.sqrt(
-        Math.pow(Math.max(circlePosition.x, window.innerWidth - circlePosition.x), 2) +
-        Math.pow(Math.max(circlePosition.y, window.innerHeight - circlePosition.y), 2)
-      )
-    : 2000
 
   return (
     <>
@@ -119,38 +111,32 @@ export function AnimatedThemeToggler() {
       <AnimatePresence>
         {isAnimating && (
           <motion.div
-            className="fixed pointer-events-none z-[9998]"
+            className="fixed pointer-events-none z-[9998] rounded-full"
             style={{
               left: circlePosition.x,
               top: circlePosition.y,
-              transform: 'translate(-50%, -50%)',
-              width: maxRadius * 2,
-              height: maxRadius * 2,
+              width: '400vmax',
+              height: '400vmax',
+              backgroundColor: newTheme === 'dark' ? '#0B0E14' : '#F8F9FA',
             }}
             initial={{
+              x: '-50%',
+              y: '-50%',
               scale: 0,
-              borderRadius: '50%',
             }}
             animate={{
+              x: '-50%',
+              y: '-50%',
               scale: 1,
-              borderRadius: '50%',
             }}
             exit={{
               opacity: 0,
             }}
             transition={{
-              duration: 0.6,
+              duration: 0.8,
               ease: [0.16, 1, 0.3, 1], // easeOutExpo
             }}
-          >
-            <div
-              className="w-full h-full rounded-full"
-              style={{
-                backgroundColor: newTheme === 'dark' ? '#0B0E14' : '#F8F9FA',
-                mixBlendMode: 'normal',
-              }}
-            />
-          </motion.div>
+          />
         )}
       </AnimatePresence>
     </>

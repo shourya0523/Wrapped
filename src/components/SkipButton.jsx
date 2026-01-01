@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useCallback } from 'react'
 
 export default function SkipButton({ onSkip, className = '' }) {
   return (

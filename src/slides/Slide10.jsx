@@ -67,7 +67,7 @@ export default function Slide10({ active }) {
   }), [])
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background px-8 relative overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-8 relative overflow-hidden">
       {/* Threads background */}
       <Threads {...threadsProps} />
       <div className="max-w-6xl w-full relative z-10">

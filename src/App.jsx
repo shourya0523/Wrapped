@@ -70,6 +70,11 @@ function App() {
     }
   }, [])
 
+  // Skip to summary (last slide)
+  const skipToSummary = useCallback(() => {
+    scrollToSlide(TOTAL_SLIDES - 1)
+  }, [scrollToSlide])
+
   // Update current slide based on scroll position
   useEffect(() => {
     const handleScroll = () => {

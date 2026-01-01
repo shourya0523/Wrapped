@@ -11,7 +11,7 @@ export default function Slide11({ active }) {
   const [hoveredIndex, setHoveredIndex] = useState(null)
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background px-8 md:px-16 relative overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-8 md:px-16 relative overflow-hidden">
       <div className="max-w-7xl w-full relative z-10">
         {/* Left side - Headline and subtext */}
         <div className="mb-12 md:mb-0 md:absolute md:left-0 md:top-1/2 md:-translate-y-1/2 md:w-1/2">

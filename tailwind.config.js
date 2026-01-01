@@ -8,10 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: {
-          DEFAULT: '#F8F9FA',
-          dark: '#0B0E14',
-        },
+        background: '#0B0E14',
         'muted-blue': '#4A6FA5',
         'muted-purple': '#6B5B95',
         'github-green': '#26A641',

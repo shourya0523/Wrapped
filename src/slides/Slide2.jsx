@@ -14,7 +14,7 @@ export default function Slide2({ active }) {
   }, [active])
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background relative overflow-hidden">
       <motion.div
         animate={{ x: active ? [0, 20, 0] : 0 }}
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}

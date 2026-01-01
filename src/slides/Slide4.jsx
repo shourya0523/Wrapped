@@ -10,7 +10,7 @@ const projects = [
 
 export default function Slide4({ active }) {
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background px-8 relative overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-8 relative overflow-hidden">
       {/* LetterGlitch background effect */}
       <div className="absolute inset-0 opacity-30">
         <LetterGlitch

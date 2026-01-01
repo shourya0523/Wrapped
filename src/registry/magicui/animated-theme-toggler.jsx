@@ -19,7 +19,7 @@ export function AnimatedThemeToggler() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="relative w-14 h-8 rounded-full bg-gray-700 dark:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-muted-blue focus:ring-offset-2 focus:ring-offset-background"
+      className="relative w-14 h-8 rounded-full bg-gray-300 dark:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-muted-blue focus:ring-offset-2 dark:focus:ring-offset-background focus:ring-offset-gray-50"
       aria-label="Toggle theme"
     >
       <motion.div

@@ -3,7 +3,7 @@ import PrismaticBurst from '../reactbits/Effects/PrismaticBurst'
 
 export default function Slide0({ active = true }) {
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background relative overflow-hidden">
       {/* PrismaticBurst background effect */}
       <div className="absolute inset-0" style={{ opacity: 0.4 }}>
         <PrismaticBurst
@@ -30,7 +30,7 @@ export default function Slide0({ active = true }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: active ? 1 : 0, y: active ? 0 : 20 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-6xl md:text-8xl font-light mb-4 text-white"
+          className="text-6xl md:text-8xl font-light mb-4 text-gray-900 dark:text-white"
         >
           Shourya Yadav
         </motion.h1>
@@ -38,7 +38,7 @@ export default function Slide0({ active = true }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: active ? 1 : 0, y: active ? 0 : 20 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="text-3xl md:text-5xl font-light text-gray-400 mb-8"
+          className="text-3xl md:text-5xl font-light text-gray-600 dark:text-gray-400 mb-8"
         >
           2025
         </motion.p>
@@ -46,7 +46,7 @@ export default function Slide0({ active = true }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: active ? 1 : 0, y: active ? 0 : 20 }}
           transition={{ duration: 1, delay: 1.1 }}
-          className="text-lg md:text-xl text-gray-500 font-light"
+          className="text-lg md:text-xl text-gray-700 dark:text-gray-500 font-light"
         >
           A year of figuring out what I actually like building.
         </motion.p>

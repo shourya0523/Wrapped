@@ -21,45 +21,52 @@ import SkipButton from './components/SkipButton'
 
 const TOTAL_SLIDES = 16
 
-// Slide titles mapping
+// Slide titles mapping (matches slides array indices)
 const slideTitles = [
-  'Shourya Yadav',
-  'Thinking in Models',
-  'Something Felt Incomplete',
-  'January: A Hackathon',
-  'Projects That Had to Work',
-  'Changed My Major',
-  'Research Stopped Being Abstract',
-  'I Started Caring About Things Breaking',
-  'I Wanted to Build Alongside People',
-  'The Work Started Leaving Campus',
-  'I Built More Consistently',
-  "I Didn't Do This Alone",
-  'I Like Building Systems',
-  'In 2026, I Want to Go Deeper',
-  'Collaboration',
-  'Summary',
+  'Shourya Yadav',                    // slides[0] = Slide0
+  'Thinking in Models',               // slides[1] = Slide1
+  'Something Felt Incomplete',        // slides[2] = Slide2
+  'January: A Hackathon',             // slides[3] = Slide3
+  'Projects That Had to Work',        // slides[4] = Slide4
+  'Changed My Major',                 // slides[5] = Slide5
+  'Research Stopped Being Abstract',  // slides[6] = Slide6
+  'I Started Caring About Things Breaking',  // slides[7] = Slide7
+  'I Wanted to Build Alongside People',      // slides[8] = Slide7_5
+  'I Wanted to Build Alongside People',      // slides[9] = Slide8
+  'The Work Started Leaving Campus',         // slides[10] = Slide9
+  'I Built More Consistently',               // slides[11] = Slide10
+  'Collaboration',                           // slides[12] = Slide11
+  'I Like Building Systems',                 // slides[13] = Slide12
+  'In 2026, I Want to Go Deeper',           // slides[14] = Slide13
+  'Summary',                                 // slides[15] = Slide14
 ]
 
-// Memoized slide wrapper to prevent unnecessary re-renders
-const SlideWrapper = memo(({ SlideComponent, index, currentSlide }) => {
+// Memoized slide wrapper to prevent unnecessary re-renders and lazy load distant slides
+const SlideWrapper = memo(({ SlideComponent, index, currentSlide, onNavigateToSlide }) => {
   const isActive = index === currentSlide
-  const isNearby = Math.abs(index - currentSlide) <= 1
-  const opacity = isNearby ? 1 : 0.3
+  const distance = Math.abs(index - currentSlide)
+  const isNearby = distance <= 1
+  const shouldRender = distance <= 1 // Only render current and adjacent slides
+  const opacity = isNearby ? 1 : 0
 
   return (
     <div
       className="w-full h-screen snap-start snap-always relative"
       style={{ willChange: isNearby ? 'opacity' : 'auto' }}
     >
-      <motion.div
-        initial={false}
-        animate={{ opacity }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-        className="w-full h-full"
-      >
-        <SlideComponent active={isActive} />
-      </motion.div>
+      {shouldRender ? (
+        <motion.div
+          initial={false}
+          animate={{ opacity }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          className="w-full h-full"
+        >
+          <SlideComponent active={isActive} onNavigateToSlide={onNavigateToSlide} />
+        </motion.div>
+      ) : (
+        // Placeholder div to maintain scroll position, but don't render the component
+        <div className="w-full h-full" aria-hidden="true" />
+      )}
     </div>
   )
 })
@@ -345,6 +352,7 @@ function App() {
           SlideComponent={SlideComponent}
           index={index}
           currentSlide={currentSlide}
+          onNavigateToSlide={scrollToSlide}
         />
       ))}
       

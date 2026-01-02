@@ -7,7 +7,7 @@ export default function Slide3({ active }) {
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-8 relative overflow-hidden">
       <div className="absolute inset-0 opacity-30">
-        <FaultyTerminal />
+        <FaultyTerminal pause={!active} />
       </div>
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
         <motion.div

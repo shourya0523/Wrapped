@@ -1,17 +1,49 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import LightPillar from '../components/LightPillar/LightPillar'
 
 const people = [
-  { name: 'Sohum Balsara', descriptor: 'late-night builds', offset: 0, linkedin: 'https://www.linkedin.com/in/sohum-balsara/' },
-  { name: 'Mehr Anand', descriptor: 'built alongside me', offset: 8, linkedin: 'https://www.linkedin.com/in/mehr-anand/' },
-  { name: 'Simran Sethi', descriptor: 'pushed me forward', offset: -6, linkedin: 'https://www.linkedin.com/in/simran-sethi-17a36632a/' },
+  { name: 'Sohum Balsara', descriptor: 'late-night builds', offset: 0, linkedin: 'https://www.linkedin.com/in/sohum-balsara/', glowColor: 'blue', glowDelay: 0 },
+  { name: 'Mehr Anand', descriptor: 'built alongside me', offset: 8, linkedin: 'https://www.linkedin.com/in/mehr-anand/', glowColor: 'purple', glowDelay: 1.5 },
+  { name: 'Simran Sethi', descriptor: 'pushed me forward', offset: -6, linkedin: 'https://www.linkedin.com/in/simran-sethi-17a36632a/', glowColor: 'green', glowDelay: 3 },
 ]
 
 export default function Slide11({ active }) {
   const [hoveredIndex, setHoveredIndex] = useState(null)
+  
+  // Theme colors - using provided colors that match the theme aesthetic
+  // These colors complement the muted-purple (#6B5B95) and muted-blue (#4A6FA5) theme
+  const topColor = '#5227FF' // deep purple matching theme
+  const bottomColor = '#FF9FFC' // pink that complements the purple theme
+  
+  const getGlowProps = (glowColor, delay) => {
+    if (!active) return {}
+    return {
+      'data-glow': glowColor,
+      style: {
+        animationDelay: `${delay}s`
+      }
+    }
+  }
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-background px-8 md:px-16 relative overflow-hidden">
+      {/* LightPillar background */}
+      <div className="absolute inset-0" style={{ zIndex: 0, opacity: 0.3 }}>
+        <LightPillar
+          topColor={topColor}
+          bottomColor={bottomColor}
+          intensity={0.4}
+          rotationSpeed={0.3}
+          glowAmount={0.002}
+          pillarWidth={3.0}
+          pillarHeight={0.4}
+          noiseIntensity={0.2}
+          pillarRotation={0}
+          interactive={false}
+          mixBlendMode="normal"
+        />
+      </div>
       <div className="max-w-7xl w-full relative z-10">
         {/* Left side - Headline and subtext */}
         <div className="mb-12 md:mb-0 md:absolute md:left-0 md:top-1/2 md:-translate-y-1/2 md:w-1/2">
@@ -52,7 +84,10 @@ export default function Slide11({ active }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-all duration-200 hover:border-gray-700/40 hover:bg-gray-900/40 cursor-default whitespace-nowrap button-pulse">
+                <div 
+                  className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-all duration-200 hover:border-gray-700/40 hover:bg-gray-900/40 cursor-default whitespace-nowrap"
+                  {...getGlowProps(person.glowColor, person.glowDelay)}
+                >
                   <span className="text-xl md:text-2xl text-gray-700 dark:text-gray-400 font-light">
                     {person.name}
                   </span>
@@ -102,7 +137,10 @@ export default function Slide11({ active }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-colors hover:border-gray-700/40 cursor-default button-pulse">
+                <div 
+                  className="px-8 py-4 rounded-full bg-gray-900/30 border border-gray-800/30 transition-colors hover:border-gray-700/40 cursor-default"
+                  {...getGlowProps(person.glowColor, person.glowDelay)}
+                >
                   <span className="text-xl text-gray-400 font-light">
                     {person.name}
                   </span>

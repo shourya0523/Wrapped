@@ -3,7 +3,7 @@ import Threads from '../reactbits/Backgrounds/Threads'
 
 const panels = [
   { title: 'AWS NYC', description: 'Event participation' },
-  { title: 'AI ethics policy', description: 'D\'Amore-McKim', url: 'https://damore-mckim.northeastern.edu/resources/ai-statement-of-mutual-understanding/' },
+  { title: 'AI ethics policy', description: 'D\'Amore-McKim', url: 'https://damore-mckim.northeastern.edu/resources/ai-statement-of-mutual-understanding/', isSpecial: true },
   { title: 'Anthropic ambassador', description: 'Community role', disclaimer: 'Had to quit for immigration reasons' },
 ]
 
@@ -36,7 +36,7 @@ export default function Slide9({ active }) {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 animate={{ opacity: active ? 1 : 0, x: active ? 0 : (index % 2 === 0 ? -50 : 50) }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className={`bg-white/80 dark:bg-gray-900/50 rounded-lg p-6 border border-gray-200 dark:border-gray-800 ${panel.url ? 'hover:border-muted-blue transition-colors cursor-pointer' : ''}`}
+                className={`bg-white/80 dark:bg-gray-900/50 rounded-lg p-6 border border-gray-200 dark:border-gray-800 ${panel.url ? 'hover:border-muted-blue transition-colors cursor-pointer' : ''} ${panel.isSpecial ? 'damore-mckim-button' : ''}`}
               >
                 <h3 className="text-xl font-medium mb-2 text-gray-900 dark:text-white">{panel.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">{panel.description}</p>

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Override Tailwind base background colors - must come after @tailwind directives */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +13,10 @@
 html, body {
   height: 100%;
   overflow: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -31,6 +37,7 @@ iframe {
 #root {
   height: 100%;
   position: relative;
+  background-color: transparent; /* Allow html background to show through */
 }
 
 /* Grain overlay */
@@ -47,139 +54,357 @@ body::before {
   opacity: 0.03;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
 
 /* GPU acceleration for animated elements */
 [data-framer-motion-component] {
   transform: translateZ(0);
 }
 
-/* Pulsing color animation for all clickable buttons */
-@keyframes buttonPulse {
+/* Pulsing color animation for clickable text */
+/* Subtle color pulse that shifts towards blue tones */
+@keyframes pulse-color-text-light {
   0%, 100% {
-    border-color: currentColor;
-    filter: brightness(1) saturate(1);
+    color: inherit;
   }
   50% {
+    color: #4A6FA5;
+  }
+}
+
+@keyframes pulse-color-text-dark {
+  0%, 100% {
+    color: inherit;
+  }
+  50% {
+    color: #6B9FE8;
+  }
+}
+
+/* Apply pulsing animation to all clickable text elements */
+a:not([class*="no-pulse"]),
+button:not([class*="no-pulse"]),
+.cursor-pointer:not([class*="no-pulse"]) {
+  animation: pulse-color-text-light 5s ease-in-out infinite;
+}
+
+/* Ensure text elements inside clickable elements also pulse */
+a:not([class*="no-pulse"]) h1,
+a:not([class*="no-pulse"]) h2,
+a:not([class*="no-pulse"]) h3,
+a:not([class*="no-pulse"]) h4,
+a:not([class*="no-pulse"]) h5,
+a:not([class*="no-pulse"]) h6,
+a:not([class*="no-pulse"]) p,
+a:not([class*="no-pulse"]) span,
+button:not([class*="no-pulse"]) h1,
+button:not([class*="no-pulse"]) h2,
+button:not([class*="no-pulse"]) h3,
+button:not([class*="no-pulse"]) h4,
+button:not([class*="no-pulse"]) h5,
+button:not([class*="no-pulse"]) h6,
+button:not([class*="no-pulse"]) p,
+button:not([class*="no-pulse"]) span,
+.cursor-pointer:not([class*="no-pulse"]) h1,
+.cursor-pointer:not([class*="no-pulse"]) h2,
+.cursor-pointer:not([class*="no-pulse"]) h3,
+.cursor-pointer:not([class*="no-pulse"]) h4,
+.cursor-pointer:not([class*="no-pulse"]) h5,
+.cursor-pointer:not([class*="no-pulse"]) h6,
+.cursor-pointer:not([class*="no-pulse"]) p,
+.cursor-pointer:not([class*="no-pulse"]) span {
+  animation: pulse-color-text-light 5s ease-in-out infinite;
+}
+
+/* Dark mode variant */
+.dark a:not([class*="no-pulse"]),
+.dark button:not([class*="no-pulse"]),
+.dark .cursor-pointer:not([class*="no-pulse"]) {
+  animation: pulse-color-text-dark 5s ease-in-out infinite;
+}
+
+.dark a:not([class*="no-pulse"]) h1,
+.dark a:not([class*="no-pulse"]) h2,
+.dark a:not([class*="no-pulse"]) h3,
+.dark a:not([class*="no-pulse"]) h4,
+.dark a:not([class*="no-pulse"]) h5,
+.dark a:not([class*="no-pulse"]) h6,
+.dark a:not([class*="no-pulse"]) p,
+.dark a:not([class*="no-pulse"]) span,
+.dark button:not([class*="no-pulse"]) h1,
+.dark button:not([class*="no-pulse"]) h2,
+.dark button:not([class*="no-pulse"]) h3,
+.dark button:not([class*="no-pulse"]) h4,
+.dark button:not([class*="no-pulse"]) h5,
+.dark button:not([class*="no-pulse"]) h6,
+.dark button:not([class*="no-pulse"]) p,
+.dark button:not([class*="no-pulse"]) span,
+.dark .cursor-pointer:not([class*="no-pulse"]) h1,
+.dark .cursor-pointer:not([class*="no-pulse"]) h2,
+.dark .cursor-pointer:not([class*="no-pulse"]) h3,
+.dark .cursor-pointer:not([class*="no-pulse"]) h4,
+.dark .cursor-pointer:not([class*="no-pulse"]) h5,
+.dark .cursor-pointer:not([class*="no-pulse"]) h6,
+.dark .cursor-pointer:not([class*="no-pulse"]) p,
+.dark .cursor-pointer:not([class*="no-pulse"]) span {
+  animation: pulse-color-text-dark 5s ease-in-out infinite;
+}
+
+/* Prevent animation on SVG icons and images - they should maintain their original colors */
+a svg,
+button svg,
+.cursor-pointer svg,
+a img,
+button img,
+.cursor-pointer img {
+  animation: none !important;
+  color: inherit !important;
+}
+
+/* Glow animations for people buttons with different theme colors */
+/* Start from initial state (no glow) to prevent jerky start */
+@keyframes glow-blue {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(74, 111, 165, 0.2),
+                0 0 10px rgba(74, 111, 165, 0.1),
+                0 0 15px rgba(74, 111, 165, 0.05);
+    border-color: rgba(107, 114, 128, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(74, 111, 165, 0.6),
+                0 0 40px rgba(74, 111, 165, 0.4),
+                0 0 60px rgba(74, 111, 165, 0.2);
     border-color: rgba(74, 111, 165, 0.7);
-    filter: brightness(1.08) saturate(1.15);
   }
 }
 
-@keyframes buttonPulseGlow {
+@keyframes glow-purple {
   0%, 100% {
-    opacity: 0;
-    transform: scale(1);
+    box-shadow: 0 0 5px rgba(107, 91, 149, 0.2),
+                0 0 10px rgba(107, 91, 149, 0.1),
+                0 0 15px rgba(107, 91, 149, 0.05);
+    border-color: rgba(107, 114, 128, 0.3);
   }
   50% {
-    opacity: 0.4;
-    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(107, 91, 149, 0.6),
+                0 0 40px rgba(107, 91, 149, 0.4),
+                0 0 60px rgba(107, 91, 149, 0.2);
+    border-color: rgba(107, 91, 149, 0.7);
   }
 }
 
-@keyframes buttonPulseDark {
+@keyframes glow-green {
   0%, 100% {
-    border-color: currentColor;
-    filter: brightness(1) saturate(1);
+    box-shadow: 0 0 5px rgba(38, 166, 65, 0.2),
+                0 0 10px rgba(38, 166, 65, 0.1),
+                0 0 15px rgba(38, 166, 65, 0.05);
+    border-color: rgba(107, 114, 128, 0.3);
   }
   50% {
-    border-color: rgba(74, 111, 165, 0.8);
-    filter: brightness(1.12) saturate(1.2);
+    box-shadow: 0 0 20px rgba(38, 166, 65, 0.6),
+                0 0 40px rgba(38, 166, 65, 0.4),
+                0 0 60px rgba(38, 166, 65, 0.2);
+    border-color: rgba(38, 166, 65, 0.7);
   }
 }
 
-@keyframes buttonPulseGlowDark {
+/* Dark mode variants with brighter glows */
+@keyframes glow-blue-dark {
   0%, 100% {
-    opacity: 0;
-    transform: scale(1);
+    box-shadow: 0 0 5px rgba(74, 111, 165, 0.3),
+                0 0 10px rgba(74, 111, 165, 0.2),
+                0 0 15px rgba(74, 111, 165, 0.1);
+    border-color: rgba(75, 85, 99, 0.3);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(74, 111, 165, 0.8),
+                0 0 50px rgba(74, 111, 165, 0.5),
+                0 0 75px rgba(74, 111, 165, 0.3);
+    border-color: rgba(74, 111, 165, 0.9);
   }
 }
 
-/* Apply pulsing to all buttons */
-button {
-  animation: buttonPulse 3s ease-in-out infinite;
+@keyframes glow-purple-dark {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(107, 91, 149, 0.3),
+                0 0 10px rgba(107, 91, 149, 0.2),
+                0 0 15px rgba(107, 91, 149, 0.1);
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(107, 91, 149, 0.8),
+                0 0 50px rgba(107, 91, 149, 0.5),
+                0 0 75px rgba(107, 91, 149, 0.3);
+    border-color: rgba(107, 91, 149, 0.9);
+  }
+}
+
+@keyframes glow-green-dark {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(38, 166, 65, 0.3),
+                0 0 10px rgba(38, 166, 65, 0.2),
+                0 0 15px rgba(38, 166, 65, 0.1);
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(38, 166, 65, 0.8),
+                0 0 50px rgba(38, 166, 65, 0.5),
+                0 0 75px rgba(38, 166, 65, 0.3);
+    border-color: rgba(38, 166, 65, 0.9);
+  }
+}
+
+/* Glow animations for people buttons using data attributes */
+[data-glow="blue"] {
+  animation: glow-blue 3s ease-in-out infinite;
+}
+
+[data-glow="purple"] {
+  animation: glow-purple 3s ease-in-out infinite;
+}
+
+[data-glow="green"] {
+  animation: glow-green 3s ease-in-out infinite;
+}
+
+/* Dark mode overrides */
+.dark [data-glow="blue"] {
+  animation: glow-blue-dark 3s ease-in-out infinite;
+}
+
+.dark [data-glow="purple"] {
+  animation: glow-purple-dark 3s ease-in-out infinite;
+}
+
+.dark [data-glow="green"] {
+  animation: glow-green-dark 3s ease-in-out infinite;
+}
+
+/* D'Amore-McKim button special animations */
+@keyframes damore-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(74, 111, 165, 0.4),
+                0 0 20px rgba(74, 111, 165, 0.3),
+                0 0 30px rgba(74, 111, 165, 0.2),
+                inset 0 0 10px rgba(74, 111, 165, 0.1);
+    border-color: rgba(74, 111, 165, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(74, 111, 165, 0.8),
+                0 0 50px rgba(74, 111, 165, 0.6),
+                0 0 75px rgba(74, 111, 165, 0.4),
+                inset 0 0 20px rgba(74, 111, 165, 0.2);
+    border-color: rgba(74, 111, 165, 1);
+  }
+}
+
+@keyframes damore-glow-dark {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(74, 111, 165, 0.6),
+                0 0 30px rgba(74, 111, 165, 0.4),
+                0 0 45px rgba(74, 111, 165, 0.3),
+                inset 0 0 15px rgba(74, 111, 165, 0.2);
+    border-color: rgba(74, 111, 165, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(74, 111, 165, 1),
+                0 0 60px rgba(74, 111, 165, 0.7),
+                0 0 90px rgba(74, 111, 165, 0.5),
+                inset 0 0 30px rgba(74, 111, 165, 0.3);
+    border-color: rgba(107, 159, 232, 1);
+  }
+}
+
+@keyframes damore-pulse {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  25% {
+    transform: scale(1.02) translateY(-3px);
+  }
+  50% {
+    transform: scale(1.03) translateY(-1px);
+  }
+  75% {
+    transform: scale(1.02) translateY(-2px);
+  }
+}
+
+/* Apply animations to D'Amore-McKim button */
+.damore-mckim-button {
+  animation: damore-glow 2s ease-in-out infinite,
+             damore-pulse 3s ease-in-out infinite;
   position: relative;
+  transition: all 0.3s ease;
 }
 
-button::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: inherit;
-  background: rgba(74, 111, 165, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  z-index: -1;
-  animation: buttonPulseGlow 3s ease-in-out infinite;
+.damore-mckim-button:hover {
+  transform: scale(1.05) translateY(-2px) !important;
+  animation-play-state: paused;
 }
 
-.dark button {
-  animation: buttonPulseDark 3s ease-in-out infinite;
+.dark .damore-mckim-button {
+  animation: damore-glow-dark 2s ease-in-out infinite,
+             damore-pulse 3s ease-in-out infinite;
 }
 
-.dark button::before {
-  background: rgba(74, 111, 165, 0.3);
-  animation: buttonPulseGlowDark 3s ease-in-out infinite;
+/* Make text inside more animated */
+.damore-mckim-button h3,
+.damore-mckim-button p {
+  animation: pulse-color-text-light 3s ease-in-out infinite;
+  font-weight: 500;
 }
 
-/* Apply pulsing to clickable links that are styled as buttons */
-a[href][target="_blank"] {
-  animation: buttonPulse 3s ease-in-out infinite;
-  position: relative;
+.dark .damore-mckim-button h3,
+.dark .damore-mckim-button p {
+  animation: pulse-color-text-dark 3s ease-in-out infinite;
 }
 
-a[href][target="_blank"]::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: inherit;
-  background: rgba(74, 111, 165, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  z-index: -1;
-  animation: buttonPulseGlow 3s ease-in-out infinite;
+/* Force bg-gray-50 to work in light mode - ensure it overrides everything */
+.bg-gray-50 {
+  background-color: rgb(249 250 251) !important;
 }
 
-.dark a[href][target="_blank"] {
-  animation: buttonPulseDark 3s ease-in-out infinite;
+/* Ensure dark mode background works - when html has .dark class */
+html.dark .bg-gray-50.dark\:bg-background,
+html.dark [class*="bg-gray-50"][class*="dark:bg-background"] {
+  background-color: rgb(11 14 20) !important;
 }
 
-.dark a[href][target="_blank"]::before {
-  background: rgba(74, 111, 165, 0.3);
-  animation: buttonPulseGlowDark 3s ease-in-out infinite;
+/* Force text colors to work in light mode */
+.text-gray-900 {
+  color: rgb(17 24 39) !important;
 }
 
-/* Apply pulsing to people name buttons (interactive divs) */
-.button-pulse {
-  animation: buttonPulse 3s ease-in-out infinite;
-  position: relative;
+.text-gray-700 {
+  color: rgb(55 65 81) !important;
 }
 
-.button-pulse::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: inherit;
-  background: rgba(74, 111, 165, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  z-index: -1;
-  animation: buttonPulseGlow 3s ease-in-out infinite;
+.text-gray-600 {
+  color: rgb(75 85 99) !important;
 }
 
-.dark .button-pulse {
-  animation: buttonPulseDark 3s ease-in-out infinite;
+.text-gray-500 {
+  color: rgb(107 114 128) !important;
 }
 
-.dark .button-pulse::before {
-  background: rgba(74, 111, 165, 0.3);
-  animation: buttonPulseGlowDark 3s ease-in-out infinite;
+.text-gray-400 {
+  color: rgb(156 163 175) !important;
+}
+
+/* Dark mode text colors - override when html has .dark class */
+html.dark .dark\:text-white {
+  color: rgb(255 255 255) !important;
+}
+
+html.dark .dark\:text-gray-300 {
+  color: rgb(209 213 219) !important;
+}
+
+html.dark .dark\:text-gray-400 {
+  color: rgb(156 163 175) !important;
+}
+
+html.dark .dark\:text-gray-500 {
+  color: rgb(107 114 128) !important;
 }
 

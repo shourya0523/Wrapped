@@ -20,7 +20,7 @@ export default function Slide13({ active }) {
         style={{ opacity: 0.3 }}
       />
       {/* Fireworks background */}
-      <FireworksBackgroundDemo population={3} />
+      <FireworksBackgroundDemo population={2} active={active} />
       <div className="max-w-4xl w-full text-center relative z-10">
         <motion.div
           initial={{ opacity: 0 }}

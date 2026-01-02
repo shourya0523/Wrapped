@@ -9,7 +9,7 @@ const randInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
 const randColor = () => `hsl(${randInt(0, 360)}, 100%, 50%)`;
 
-function createParticle(x, y, color, speed, direction, gravity, friction, size) {
+function createParticle(x, y, color, particleColor, speed, direction, gravity, friction, size) {
   const vx = Math.cos(direction) * speed;
   const vy = Math.sin(direction) * speed;
   const alpha = 1;
@@ -19,6 +19,7 @@ function createParticle(x, y, color, speed, direction, gravity, friction, size) 
     x,
     y,
     color,
+    particleColor,
     speed,
     direction,
     vx,
@@ -39,9 +40,16 @@ function createParticle(x, y, color, speed, direction, gravity, friction, size) 
     draw(ctx) {
       ctx.save();
       ctx.globalAlpha = this.alpha;
+      ctx.shadowBlur = this.size * 30;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.shadowColor = this.color;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
+      ctx.fillStyle = this.particleColor;
+      ctx.fill();
+      // Draw again with reduced blur for deeper color intensity
+      ctx.shadowBlur = this.size * 15;
       ctx.fill();
       ctx.restore();
     },
@@ -51,7 +59,7 @@ function createParticle(x, y, color, speed, direction, gravity, friction, size) 
   };
 }
 
-function createFirework(x, y, targetY, color, speed, size, particleSpeed, particleSize, onExplode) {
+function createFirework(x, y, targetY, color, stickColor, speed, size, particleSpeed, particleSize, onExplode) {
   const angle = -Math.PI / 2 + rand(-0.3, 0.3);
   const vx = Math.cos(angle) * speed;
   const vy = Math.sin(angle) * speed;
@@ -63,6 +71,7 @@ function createFirework(x, y, targetY, color, speed, size, particleSpeed, partic
     y,
     targetY,
     color,
+    stickColor,
     speed,
     size,
     angle,
@@ -86,7 +95,7 @@ function createFirework(x, y, targetY, color, speed, size, particleSpeed, partic
       return true;
     },
     explode() {
-      const numParticles = randInt(50, 150);
+      const numParticles = randInt(30, 80); // Reduced from 50-150 to 30-80
       const particles = [];
       for (let i = 0; i < numParticles; i++) {
         const particleAngle = rand(0, Math.PI * 2);
@@ -96,6 +105,7 @@ function createFirework(x, y, targetY, color, speed, size, particleSpeed, partic
           this.x,
           this.y,
           this.color,
+          this.stickColor,
           localParticleSpeed,
           particleAngle,
           0.05,
@@ -107,6 +117,10 @@ function createFirework(x, y, targetY, color, speed, size, particleSpeed, partic
     },
     draw(ctx) {
       ctx.save();
+      ctx.shadowBlur = this.size * 25;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.shadowColor = this.color;
       ctx.beginPath();
       if (this.trail.length > 1) {
         ctx.moveTo(this.trail[0]?.x ?? this.x, this.trail[0]?.y ?? this.y);
@@ -117,9 +131,12 @@ function createFirework(x, y, targetY, color, speed, size, particleSpeed, partic
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x, this.y);
       }
-      ctx.strokeStyle = this.color;
+      ctx.strokeStyle = this.stickColor;
       ctx.lineWidth = this.size;
       ctx.lineCap = 'round';
+      ctx.stroke();
+      // Draw again with reduced blur for deeper color intensity
+      ctx.shadowBlur = this.size * 12;
       ctx.stroke();
       ctx.restore();
     },
@@ -146,15 +163,22 @@ function FireworksBackground({
   canvasProps,
   population = 1,
   color,
+  stickColor = '#ffffff',
   fireworkSpeed = { min: 4, max: 8 },
   fireworkSize = { min: 2, max: 5 },
   particleSpeed = { min: 2, max: 7 },
   particleSize = { min: 1, max: 5 },
+  paused = false,
   ...props
 }) {
   const canvasRef = React.useRef(null);
   const containerRef = React.useRef(null);
+  const isPausedRef = React.useRef(paused);
   React.useImperativeHandle(ref, () => containerRef.current);
+
+  React.useEffect(() => {
+    isPausedRef.current = paused;
+  }, [paused]);
 
   React.useEffect(() => {
     const canvas = canvasRef.current;
@@ -185,7 +209,11 @@ function FireworksBackground({
       explosions.push(...particles);
     };
 
+    let launchTimeoutId = null;
+    
     const launchFirework = () => {
+      if (isPausedRef.current) return;
+      
       const x = rand(maxX * 0.1, maxX * 0.9);
       const y = maxY;
       const targetY = rand(maxY * 0.1, maxY * 0.4);
@@ -197,17 +225,23 @@ function FireworksBackground({
         y,
         targetY,
         fireworkColor,
+        stickColor,
         speed,
         size,
         particleSpeed,
         particleSize,
         handleExplosion
       ));
-      const timeout = rand(300, 800) / population;
-      setTimeout(launchFirework, timeout);
+      
+      // Balanced timeout: 1200-2200ms base, divided by population
+      // More frequent but not too dense
+      const baseTimeout = rand(1200, 2200);
+      const timeout = baseTimeout / Math.max(1, population * 0.8);
+      launchTimeoutId = setTimeout(launchFirework, timeout);
     };
 
-    launchFirework();
+    // Start with shorter initial delay
+    launchTimeoutId = setTimeout(launchFirework, rand(500, 1000));
 
     let animationFrameId;
     const animate = () => {
@@ -249,6 +283,7 @@ function FireworksBackground({
         y,
         targetY,
         fireworkColor,
+        stickColor,
         speed,
         size,
         particleSpeed,
@@ -260,6 +295,10 @@ function FireworksBackground({
     container.addEventListener('click', handleClick);
 
     return () => {
+      isPausedRef.current = true;
+      if (launchTimeoutId) {
+        clearTimeout(launchTimeoutId);
+      }
       window.removeEventListener('resize', setCanvasSize);
       container.removeEventListener('click', handleClick);
       cancelAnimationFrame(animationFrameId);
@@ -267,10 +306,12 @@ function FireworksBackground({
   }, [
     population,
     color,
+    stickColor,
     fireworkSpeed,
     fireworkSize,
     particleSpeed,
     particleSize,
+    paused,
   ]);
 
   return (

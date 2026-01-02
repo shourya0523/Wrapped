@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes';
 import { FireworksBackground } from '@/components/animate-ui/components/backgrounds/fireworks';
 
-export default function FireworksBackgroundDemo({ population = 3 }) {
+export default function FireworksBackgroundDemo({ population = 2, active = true }) {
   const { resolvedTheme: theme } = useTheme();
 
   // Themed color palette - blues and purples matching the project theme
@@ -29,13 +29,17 @@ export default function FireworksBackgroundDemo({ population = 3 }) {
         '#2A2F3E',           // medium dark
       ];
 
+  const stickColor = theme === 'dark' ? '#ffffff' : '#000000';
+
   return (
     <FireworksBackground
       className="absolute inset-0 flex items-center justify-center rounded-xl"
       color={colors}
+      stickColor={stickColor}
       population={population}
       fireworkSpeed={{ min: 6, max: 12 }}
       particleSpeed={{ min: 3, max: 10 }}
+      paused={!active}
     />
   );
 }

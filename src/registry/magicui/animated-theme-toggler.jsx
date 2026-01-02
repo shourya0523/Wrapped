@@ -39,7 +39,7 @@ export function AnimatedThemeToggler() {
     setTimeout(() => {
       setIsAnimating(false)
       setNewTheme(null)
-    }, 800)
+    }, 700)
   }
 
   return (
